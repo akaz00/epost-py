@@ -52,5 +52,3 @@ class EPost():
             ret.append({'address': addr, 'postcd': postcd})
 
         return ret
-
-EPost("abc").get_postal_code('rr')
