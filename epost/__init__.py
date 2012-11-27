@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import urllib2
 from xml.dom.minidom import parse, parseString
+from types import *
 
 """
 author: akaz
@@ -26,9 +27,11 @@ class EPost():
         >> ep.get_postal_code("논현1동")
  
         """
+        if type(search_keyword) is StringType:
+            search_keyword = unicode(search_keyword, 'utf-8')
 
         prefix_url = "http://biz.epost.go.kr/KpostPortal/openapied?regkey={0}&target=post&query=".format(self.api_key)
-        req = urllib2.Request(prefix_url + unicode(search_keyword, 'utf-8').encode('euc-kr'), headers={'Accept-Language': 'ko'})
+        req = urllib2.Request(prefix_url + search_keyword.encode('euc-kr'), headers={'Accept-Language': 'ko'})
         content = urllib2.urlopen(req).read()
         
         xml_string = unicode(content, 'euc-kr').encode('utf-8') \
